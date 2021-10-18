@@ -83,6 +83,9 @@ test_linux:
 build_image: build_linux
 	docker build . -f Dockerfile.linux
 
+build-image-$(ARCH): build_linux
+	docker build . -f Dockerfile.$(ARCH) -t flannel-$(ARCH)
+
 push_image: build_image
 	docker push quay.io/coreos/flannel-cni:${VERSION}
 
